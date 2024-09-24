@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The News Today</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+
+  <body>
+    <nav>
+      <div class="main-nav container flex">
+        <a href="" class="company-logo">
+          <img src="./logo.png" alt="logo" />
+        </a>
+        <div class="nav-links">
+          <ul class="flex">
+            <li
+              class="hover-link nav-item"
+              id="cricket"
+              onClick="onNavItemClick('england')"
+            >
+              England
+            </li>
+            <li
+              class="hover-link nav-item"
+              id="india"
+              onClick="onNavItemClick('india')"
+            >
+              India
+            </li>
+            <li
+              class="hover-link nav-item"
+              id="technology"
+              onClick="onNavItemClick('europe')"
+            >
+              Europe
+            </li>
+            <li
+              class="hover-link nav-item"
+              id="politics"
+              onClick="onNavItemClick('america')"
+            >
+              America
+            </li>
+            <a class="hover-link nav-item" href="/weather.html">Weather</a>
+            <a class="hover-link nav-item" href="/stock.html">Stock</a>
+          </ul>
+        </div>
+        <div class="search-bar flex">
+          <input
+            type="text"
+            class="news-input"
+            id="search-text"
+            placeholder="e.g. Science"
+          />
+          <button class="search-button" id="search-button">Search</button>
+        </div>
+      </div>
+    </nav>
+    <div class="outer-card">
+      <div class="card2">
+        <div class="card-content">
+          <select class="translation-dropdown" id="language-select">
+            <option value="">Select Language</option>
+            <option value="es">Spanish</option>
+            <option value="fr">French</option>
+            <option value="de">German</option>
+            <option value="ru">Russian</option>
+            <option value="ta">Tamil</option>
+            <option value="hi">Hindi</option>
+            <option value="ml">Malayalam</option>
+            <option value="ru">Polish</option>
+            <option value="ru">Chineese</option>
+            <option value="ru">Japanese</option>
+            <option value="ru">Korean</option>
+            <option value="ru">Urdu</option>
+            <option value="ru">Mandrin</option>
+          </select>
+          <h2>Flash News!</h2>
+
+          <h3 id="news-title">
+            DOJ: Russia Aimed Propaganda at Gamers, Minorities to Swing 2024
+            Election
+          </h3>
+
+          <h6 class="news-source" id="news-source">24/09/2024</h6>
+          <p class="news-desc" id="news-desc">
+            In late August 2023, Ilya Gambashidze was in a conference room at
+            the office of Social Design Agency, a Russian IT company he founded
+            that is based in Moscow, close to the world-renowned Moscow
+            Conservatory.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="container flex">
+      <aside class="sidebar">
+        <h2>Categories</h2>
+        <ul>
+          <li><a href="#" onClick="onNavItemClick('sports')">Sports</a></li>
+          <li><a href="#" onClick="onNavItemClick('health')">Health</a></li>
+          <li><a href="#" onClick="onNavItemClick('business')">Business</a></li>
+          <li>
+            <a href="#" onClick="onNavItemClick('entertainment')"
+              >Entertainment</a
+            >
+          </li>
+          <li><a href="#" onClick="onNavItemClick('science')">Science</a></li>
+          <li><a href="#" onClick="onNavItemClick('world')">World</a></li>
+          <li>
+            <a href="#" onClick="onNavItemClick('lifestyle')">Lifestyle</a>
+          </li>
+          <li><a href="#" onClick="onNavItemClick('cricket')">Cricket</a></li>
+          <li>
+            <a href="#" onClick="onNavItemClick('technology')">Technology</a>
+          </li>
+          <li><a href="#" onClick="onNavItemClick('boxing')">Boxing</a></li>
+          <li><a href="#" onClick="onNavItemClick('politics')">Politics</a></li>
+          <li>
+            <a href="#" onClick="onNavItemClick('advertisements')"
+              >Advertisements</a
+            >
+          </li>
+          <li><a href="#" onClick="onNavItemClick('music')">Music</a></li>
+          <li><a href="#" onClick="onNavItemClick('kpop')">K-Pop</a></li>
+        </ul>
+      </aside>
+
+      <main>
+        <div class="cards-container" id="cardscontainer"></div>
+        <div class="loader" id="loader" style="display: none"></div>
+      </main>
+    </div>
+
+    <template id="template-news-card">
+      <div class="card">
+        <div class="card-header">
+          <img src="https://via.placeholder.com/400x200" alt="" id="news-img" />
+        </div>
+        <div class="card-content">
+          <h3 id="news-title">This is the Title</h3>
+          <h6 class="news-source" id="news-source">constGenius 02/02/2024</h6>
+          <p class="news-desc" id="news-desc">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem
+            incidunt ratione, dolore beatae quaerat voluptatum autem fugit
+            voluptas minima eligendi facere tenetur cumque. Dolorem porro,
+            fugiat distinctio a accusamus cum!
+          </p>
+        </div>
+      </div>
+    </template>
+    <script>
+      const translations = {
+        es: {
+          title:
+            "DOJ: Rusia Apuntó Propaganda a Jugadores, Minorías para Influir en las Elecciones de 2024",
+          desc: "A finales de agosto de 2023, Ilya Gambashidze estaba en una sala de conferencias en la oficina de Social Design Agency, una empresa de TI rusa que fundó y que tiene su sede en Moscú, cerca del renombrado Conservatorio de Moscú.",
+        },
+        fr: {
+          title:
+            "DOJ : La Russie A visé la Propagande aux Joueurs, Minorités pour Influencer les Élections de 2024",
+          desc: "Fin août 2023, Ilya Gambashidze était dans une salle de conférence au bureau de Social Design Agency, une entreprise informatique russe qu'il a fondée et qui est basée à Moscou, près du célèbre Conservatoire de Moscou.",
+        },
+        de: {
+          title:
+            "DOJ: Russland Zielte Propaganda auf Gamer, Minderheiten, um die Wahl 2024 zu Beeinflussen",
+          desc: "Ende August 2023 befand sich Ilya Gambashidze in einem Konferenzraum im Büro von Social Design Agency, einem russischen IT-Unternehmen, das er gegründet hat und das in Moskau, in der Nähe des weltberühmten Moskauer Konservatoriums, ansässig ist.",
+        },
+        ru: {
+          title:
+            "Минюст: Россия Направила Пропаганду на Геймеров, Меньшинства, чтобы Влиять на Выборы 2024 года",
+          desc: "В конце августа 2023 года Илья Гамбашидзе находился в конференц-зале офиса Social Design Agency, российской IT-компании, которую он основал и которая расположена в Москве, недалеко от всемирно известной Московской консерватории.",
+        },
+
+        ta: {
+          title:
+            "DOJ: ரஷ்யா 2024 தேர்தலை தாக்கிக்கொள்வதற்காக விளையாட்டு வீரர்கள் மற்றும் குறைவானோர் மீது விளம்பரத்தை இலக்கு செய்தது",
+          desc: "2023 ஆம் ஆண்டு ஆகஸ்ட் மாதத்தின் இறுதியில், இல்யா கம்பாஷிட்சே, மொஸ்கோவில், உலக அளவில் புகழ்பெற்ற மொஸ்கோ கான்சர்வெட்டரியின் அருகில் உள்ள ஒரு ரஷிய IT நிறுவனமான சமூக வடிவமைப்பு முகாமையின் அலுவலகத்தில் ஒரு மாநாட்டு கூடத்தில் இருந்தார்.",
+        },
+        hi: {
+          title:
+            "DOJ: रूस ने 2024 चुनाव में प्रभाव डालने के लिए गेमर्स और अल्पसंख्यकों पर प्रचार का लक्ष्य बनाया",
+          desc: "अगस्त 2023 के अंत में, इल्या गामबाशिद्ज़े एक सम्मेलन कक्ष में थे, जो सोशल डिजाइन एजेंसी के कार्यालय में था, जो एक रूसी आईटी कंपनी है जिसे उन्होंने स्थापित किया और जो मॉस्को में स्थित है, विश्व प्रसिद्ध मॉस्को कंज़र्वेटरी के निकट।",
+        },
+        ml: {
+          title:
+            "DOJ: റഷ്യ 2024 തെരഞ്ഞെടുപ്പിൽ സ്വാധീനിക്കാൻ ഗെയിമർമാർക്കും കുറവ് വിഭാഗങ്ങൾക്കും പ്രചാരണം ലക്ഷ്യമിട്ടു",
+          desc: "2023 ഓഗസ്റ്റ് അവസാനം, ഇലിയ ഗംബാശിഡ്‌സ്, ലോക പ്രശസ്തമായ മോസ്‌കോ കണ്‍സര്‍വേറ്ററിയുടെ അടുത്തുള്ള മോസ്‌കോയിലെ സാമൂഹിക ഡിസൈൻ ഏജൻസിയുടെ ഓഫിസിൽ ഒരു സമ്മേളനകമ്ബത്ത് ഉണ്ടായിരുന്നു.",
+        },
+        ml: {
+          title:
+            "DOJ: റഷ്യ 2024 തെരഞ്ഞെടുപ്പിൽ സ്വാധീനിക്കാൻ ഗെയിമർമാർക്കും കുറവ് വിഭാഗങ്ങൾക്കും പ്രചാരണം ലക്ഷ്യമിട്ടു",
+          desc: "2023 ഓഗസ്റ്റ് അവസാനം, ഇലിയ ഗംബാശിഡ്‌സ്, ലോക പ്രശസ്തമായ മോസ്‌കോ കണ്‍സര്‍വേറ്ററിയുടെ അടുത്തുള്ള മോസ്‌കോയിലെ സാമൂഹിക ഡിസൈൻ ഏജൻസിയുടെ ഓഫിസിൽ ഒരു സമ്മേളനകമ്ബത്ത് ഉണ്ടായിരുന്നു.",
+        },
+      };
+
+      document
+        .getElementById("language-select")
+        .addEventListener("change", function () {
+          const lang = this.value;
+          if (lang) {
+            document.getElementById("news-title").textContent =
+              translations[lang].title;
+            document.getElementById("news-desc").textContent =
+              translations[lang].desc;
+          }
+        });
+    </script>
+  </body>
+</html>

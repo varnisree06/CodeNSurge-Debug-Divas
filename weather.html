@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The News Today</title>
+    <link rel="stylesheet" href="weather.css">
+    <script src="weather.js" defer></script>
+</head>
+<body>
+    <nav>
+        <div class="main-nav container flex">
+            <a href="" class="company-logo">
+                <img src="./logo.png" alt="logo">
+            </a>
+            <div class="nav-links">
+                <ul class="flex">
+                    <li class="hover-link nav-item" id="cricket" onClick="onNavItemClick('england')">England</li>
+                    <li class="hover-link nav-item" id="india" onClick="onNavItemClick('india')">India</li>
+                    <li class="hover-link nav-item" id="technology" onClick="onNavItemClick('europe')">Europe</li>
+                    <li class="hover-link nav-item" id="politics" onClick="onNavItemClick('america')">America</li>
+                    <a  class="hover-link nav-item" href="/weather.html">Weather</a>
+                    <a  class="hover-link nav-item" href="/stock.html">Stock</a>
+                </ul>
+            </div>
+            <div class="search-bar flex">
+              <input type="text" class="news-input" id="search-text" placeholder="e.g. Science">
+              <button class="search-button" id="search-button">Search</button>
+          </div>
+    </nav>
+    <hr>
+    <div class="container1">
+        <section class="main">
+          <section class="inputs">
+            <p id="default" class="default">
+              Weather of <span id="chennai">Chennai</span>
+            </p>
+            <input type="text" placeholder="Enter Your City Name...." 
+            id="cityinput">
+            <input type="submit" value="Submit" id="add" />
+            <button placeholder="submit" id="add"></button>
+          </section>
+          <section class="display">
+            <div class="wrapper">
+              <h2 id="cityoutput">Weather of the City</h2>
+              <p id="temp">Temperature:</p>
+              <p id="description">Sky Condition:</p>
+              <p id="wind">Wind:</p>
+            </div>
+          </section>
+        </section>
+      </div>  
+</body>
+</html>
